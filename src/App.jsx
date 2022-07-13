@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { SiPuma } from "react-icons/si";
-import { AiOutlineSearch } from "react-icons/ai";
+import Cards from "./components/Cards";
+import Header from "./components/Header";
+import Search from "./components/Search";
 
 function App() {
   const arrProducts = [
@@ -73,42 +74,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <SiPuma className="iconPuma" />
-      </header>
-      <div className="search">
-        <input
-          placeholder="Search ..."
-          className="input"
-          value={search}
-          onChange={handleSearch}
-        ></input>
-        <button className="btnSearch">
-          <AiOutlineSearch />
-        </button>
-      </div>
-
-      <div className="main">
-        <div className="cards">
-          {filtered.map((item, index) => {
-            return (
-              <div key={index} className="card">
-                <img src={item.image} alt={item.name} />
-                <div className="desc">
-                  <p className="nameProduct">{item.name}</p>
-                  <p className="priceProduct">{item.price}</p>
-                  <button
-                    className={!item.status ? "btnCart" : "addBtnCart"}
-                    onClick={() => handleClickAddCart(index)}
-                  >
-                    {!item.status ? "Добавить в корзину" : "Удалить из корзины"}
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <Header />
+      <Search handleSearch={handleSearch} search={search} />
+      <Cards filtered={filtered} handleClickAddCart={handleClickAddCart} />
     </div>
   );
 }
